@@ -26,6 +26,7 @@
     display: flex;
     .arrow {
       cursor: pointer;
+      user-select: none;
     }
     .value {
       margin: 0 10px;
