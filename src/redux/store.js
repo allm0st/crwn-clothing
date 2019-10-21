@@ -4,7 +4,12 @@ import rootReducer from './root.reducer';
 
 const middlewares = [];
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const envIsProduction = process.env.NODE_ENV === 'production';
+
+const composeEnhancers =
+  !envIsProduction && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : compose;
 
 const store = createStore(
   rootReducer,
