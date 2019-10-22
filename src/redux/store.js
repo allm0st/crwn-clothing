@@ -1,8 +1,9 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import { persistStore } from 'redux-persist';
+import thunk from 'redux-thunk';
 import rootReducer from './root.reducer';
 
-const middlewares = [];
+const middlewares = [thunk];
 
 const envIsProduction = process.env.NODE_ENV === 'production';
 
