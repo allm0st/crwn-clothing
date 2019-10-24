@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 
@@ -6,8 +7,14 @@ const StripeCheckoutButton = ({ price }) => {
   const publishableKey = 'pk_test_zZjI69E4Xx0UlDO6HgLp7dYQ00OHgRSO1Z';
 
   const onToken = token => {
-    console.log(token);
-    alert('Payment Succesful!');
+    axios.post('/payment', { amount: priceForStripe, token }).then(res => {
+      alert('Payment was successful!');
+    }).catch(error => {
+      console.log('Payment error: ', JSON.parse(error));
+      alert(
+        'There was an issue with your payment. Please make sure you use the provided test credit card.'
+      );
+    });
   };
 
   return (
