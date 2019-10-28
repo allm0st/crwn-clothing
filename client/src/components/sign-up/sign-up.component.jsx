@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { signUpStart } from '../../redux/user/user.actions';
-import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
-import { SignUpContainer, SignUpTitle } from './sign-up.styles';
+import { SignUpButton, SignUpContainer, SignUpTitle } from './sign-up.styles';
 
 const SignUp = props => {
   const [userData, setUserData] = useState({
@@ -70,7 +69,7 @@ const SignUp = props => {
           label="Confirm Password"
           required
         />
-        <CustomButton type="submit">SIGN UP</CustomButton>
+        <SignUpButton type="submit">SIGN UP</SignUpButton>
       </form>
     </SignUpContainer>
   );
