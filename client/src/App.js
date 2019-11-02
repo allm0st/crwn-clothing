@@ -1,11 +1,12 @@
 import React, { lazy, Suspense, useEffect } from 'react';
+import Particles from 'react-particles-js';
 import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import ErrorBoundary from './components/error-boundary/error-boundary.component';
 import Header from './components/header/header.component';
 import Spinner from './components/spinner/spinner.component';
-import { GlobalStyle } from './global.styles';
+import { GlobalStyle, ParticlesOverlay } from './global.styles';
 import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
@@ -17,6 +18,24 @@ const SignInAndSignUpPage = lazy(() =>
 );
 const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'));
 
+const particlesOptions = {
+  particles: {
+    color: {
+      value: '#888',
+    },
+    line_linked: {
+      color: '#888',
+    },
+    number: {
+      value: 50,
+      density: {
+        enable: true,
+        value_area: 1500,
+      },
+    },
+  },
+};
+
 const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
     checkUserSession();
@@ -24,6 +43,9 @@ const App = ({ checkUserSession, currentUser }) => {
 
   return (
     <>
+      <ParticlesOverlay>
+        <Particles params={particlesOptions} height="100%" width="100%" />
+      </ParticlesOverlay>
       <GlobalStyle />
       <Header />
       <Switch>
