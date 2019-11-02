@@ -26,23 +26,23 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.get('/service-worker.js', (req, res) => {
+app.get('/service-worker.js', function(req, res) {
   res.sendFile(path.resolve(__dirname, '..', 'build', 'service-worker.js'));
 });
 
-app.listen(port, error => {
+app.listen(port, function(error) {
   if (error) throw error;
   console.log('Server running on port' + port);
 });
 
-app.post('/payment', (req, res) => {
+app.post('/payment', function(req, res) {
   const body = {
     source: req.body.token.id,
     amount: req.body.amount,
     currency: 'usd',
   };
 
-  stripe.charges.create(body, (stripeErr, stripeRes) => {
+  stripe.charges.create(body, function(stripeErr, stripeRes) {
     if (stripeErr) {
       res.status(500).send({ error: stripeErr });
     } else {
